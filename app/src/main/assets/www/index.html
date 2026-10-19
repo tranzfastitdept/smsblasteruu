@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Bulk SMS Campaign Manager</title>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div id="app-layout">
+
+    <!-- SIDEBAR NAVIGATION (Replaces bottom bar) -->
+    <aside id="app-sidebar" class="app-sidebar">
+      <!-- Sidebar Header / Brand -->
+      <div class="sidebar-header">
+        <div class="brand-logo">
+          <div class="brand-emblem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              <path d="M13 8l-4 4 3 1-1 3 4-4-3-1 1-3z" fill="currentColor"></path>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">Bulk SMS</span>
+            <span class="brand-tag">Campaign Pro</span>
+          </div>
+        </div>
+        <button class="sidebar-close-btn" id="sidebar-close-btn" onclick="toggleSidebar(false)" aria-label="Close menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">DISPATCH</div>
+        
+        <button class="nav-link active" data-target="screen-dashboard" onclick="navigateTo('screen-dashboard')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          <span>Dashboard</span>
+        </button>
+
+        <button class="nav-link" data-target="screen-composer" onclick="navigateTo('screen-composer')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+          <span>Campaign Composer</span>
+        </button>
+
+        <button class="nav-link" data-target="screen-active" onclick="navigateTo('screen-active')">
+          <div class="nav-icon-wrapper">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            <span id="nav-active-dot" class="live-status-dot hidden"></span>
+          </div>
+          <span>Active Monitor</span>
+          <span id="nav-active-pill" class="nav-badge-pill hidden">LIVE</span>
+        </button>
+
+        <button class="nav-link" data-target="screen-test" onclick="navigateTo('screen-test')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          <span>Quick SMS Test</span>
+          <span class="nav-badge-pill tag-new">NEW</span>
+        </button>
+
+        <div class="nav-section-title">RECIPIENTS</div>
+
+        <button class="nav-link" data-target="screen-generator" onclick="navigateTo('screen-generator')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          <span>Number Generator</span>
+        </button>
+
+        <button class="nav-link" data-target="screen-import" onclick="navigateTo('screen-import')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          <span>Contact Import</span>
+        </button>
+
+        <button class="nav-link" data-target="screen-optout" onclick="navigateTo('screen-optout')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>
+          <span>Suppression & Opt-Out</span>
+        </button>
+
+        <div class="nav-section-title">ANALYTICS & CONFIG</div>
+
+        <button class="nav-link" data-target="screen-history" onclick="navigateTo('screen-history')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <span>Campaign History</span>
+        </button>
+
+        <button class="nav-link" data-target="screen-reports" onclick="navigateTo('screen-reports')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+          <span>Reports & Audit</span>
+        </button>
+
+        <button class="nav-link" data-target="screen-settings" onclick="navigateTo('screen-settings')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          <span>Preferences</span>
+        </button>
+      </nav>
+
+      <!-- Sidebar Footer -->
+      <div class="sidebar-footer">
+        <div class="carrier-chip">
+          <div class="chip-dot"></div>
+          <div class="chip-text">
+            <span id="sidebar-sim-name">SIM Ready</span>
+            <small id="sidebar-sim-carrier">Direct Carrier Mode</small>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- SIDEBAR BACKDROP OVERLAY FOR MOBILE -->
+    <div id="sidebar-backdrop" class="sidebar-backdrop" onclick="toggleSidebar(false)"></div>
+
+    <!-- MAIN APP WRAPPER -->
+    <div id="app-body">
+      
+      <!-- TOP NAVBAR -->
+      <header class="app-topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle-btn" onclick="toggleSidebar(true)" aria-label="Open sidebar menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+          <div class="topbar-title-wrap">
+            <h1 class="page-title" id="topbar-page-title">Dashboard</h1>
+            <span class="page-tag" id="topbar-page-sub">Carrier SIM Messaging</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Audio Chime Toggle -->
+          <button class="icon-tool-btn" id="audio-toggle-btn" onclick="toggleAudio()" title="Toggle Sound Feedback">
+            <svg id="audio-icon-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+            <svg id="audio-icon-off" class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+          </button>
+
+          <!-- Live Broadcast Pulse Pill -->
+          <button id="topbar-live-indicator" class="pulse-indicator-pill hidden" onclick="navigateTo('screen-active')">
+            <span class="live-dot-ping"></span>
+            <span class="live-dot"></span>
+            <span>Broadcasting Live</span>
+          </button>
+
+          <!-- Quick Test Send Button -->
+          <button class="btn btn-sm btn-outline-cyan topbar-action-btn" onclick="navigateTo('screen-test')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            <span class="btn-text-hide-mobile">Test SMS</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- SCROLLABLE PAGE CONTAINER -->
+      <main id="main-viewport" class="main-viewport">
+
+        <!-- ============================================================== -->
+        <!-- SCREEN 1: DASHBOARD -->
+        <!-- ============================================================== -->
+        <section id="screen-dashboard" class="screen-view active">
+          <div class="view-intro">
+            <h2>System Overview</h2>
+            <p>Carrier hardware status and persistent message queue analytics</p>
+          </div>
+
+          <!-- Permission Alert Banner -->
+          <div id="permission-alert" class="alert-card alert-warning hidden">
+            <div class="alert-icon">⚠️</div>
+            <div class="alert-content">
+              <strong>Telephony Access Required:</strong> Direct SIM broadcast requires Android SMS & Phone state permissions.
+            </div>
+            <button class="btn btn-sm btn-primary" onclick="requestNativePermissions()">Grant Permissions</button>
+          </div>
+
+          <!-- Quick Launch Hero Cards -->
+          <div class="hero-actions-grid">
+            <div class="hero-action-card card-composer" onclick="navigateTo('screen-composer')">
+              <div class="hero-icon-bubble">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+              </div>
+              <div class="hero-card-info">
+                <h3>New Campaign</h3>
+                <p>Compose personalized template & schedule broadcast</p>
+              </div>
+              <span class="arrow-indicator">→</span>
+            </div>
+
+            <div class="hero-action-card card-test" onclick="navigateTo('screen-test')">
+              <div class="hero-icon-bubble">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+              </div>
+              <div class="hero-card-info">
+                <h3>Quick SMS Test</h3>
+                <p>Send a single text to verify SIM balance & delivery</p>
+              </div>
+              <span class="arrow-indicator">→</span>
+            </div>
+
+            <div class="hero-action-card card-generator" onclick="navigateTo('screen-generator')">
+              <div class="hero-icon-bubble">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              </div>
+              <div class="hero-card-info">
+                <h3>Number Generator</h3>
+                <p>Generate exact 4-digit zero-padded number series</p>
+              </div>
+              <span class="arrow-indicator">→</span>
+            </div>
+
+            <div class="hero-action-card card-import" onclick="navigateTo('screen-import')">
+              <div class="hero-icon-bubble">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              </div>
+              <div class="hero-card-info">
+                <h3>Import Contacts</h3>
+                <p>Map columns from CSV, TXT, or Excel XLSX files</p>
+              </div>
+              <span class="arrow-indicator">→</span>
+            </div>
+          </div>
+
+          <!-- Database Statistics Grid -->
+          <div class="section-title-bar">
+            <h3>Local Telemetry Metrics</h3>
+            <span class="badge badge-dark">SQLite Persistent</span>
+          </div>
+
+          <div class="stats-counter-grid">
+            <div class="stat-card">
+              <span class="stat-icon">📊</span>
+              <span class="stat-label">Total Campaigns</span>
+              <span id="stat-total-campaigns" class="stat-value count-up">0</span>
+              <span class="stat-sub">Executed & drafts</span>
+            </div>
+
+            <div class="stat-card">
+              <span class="stat-icon">👥</span>
+              <span class="stat-label">Total Recipients</span>
+              <span id="stat-total-recipients" class="stat-value count-up">0</span>
+              <span class="stat-sub">In local database</span>
+            </div>
+
+            <div class="stat-card stat-highlight-green">
+              <span class="stat-icon">🚀</span>
+              <span class="stat-label">Sent Today</span>
+              <span id="stat-sent-today" class="stat-value count-up">0</span>
+              <span class="stat-sub">Delivered / submitted</span>
+            </div>
+
+            <div class="stat-card stat-highlight-blue">
+              <span class="stat-icon">✅</span>
+              <span class="stat-label">Handset Receipts</span>
+              <span id="stat-confirmed-delivered" class="stat-value count-up">0</span>
+              <span class="stat-sub">Confirmed delivered</span>
+            </div>
+
+            <div class="stat-card stat-highlight-amber">
+              <span class="stat-icon">⏳</span>
+              <span class="stat-label">Awaiting / Queued</span>
+              <span id="stat-messages-queued" class="stat-value count-up">0</span>
+              <span class="stat-sub">Pending interval delay</span>
+            </div>
+
+            <div class="stat-card stat-highlight-red">
+              <span class="stat-icon">⚠️</span>
+              <span class="stat-label">Failed Messages</span>
+              <span id="stat-failed-messages" class="stat-value count-up">0</span>
+              <span class="stat-sub">Carrier error reports</span>
+            </div>
+          </div>
+
+          <!-- Telephony & SIM Hardware Status Card -->
+          <div class="glass-card">
+            <div class="card-header-row">
+              <div class="header-with-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+                <h4>Device Carrier & SIM Status</h4>
+              </div>
+              <button class="btn btn-xs btn-outline" onclick="loadDashboard()">Refresh</button>
+            </div>
+
+            <div id="sim-cards-list" class="sim-subscriptions-list">
+              <div class="loading-state">Querying active carrier subscriptions...</div>
+            </div>
+
+            <div class="hardware-meta-footer">
+              <div class="meta-block">
+                <span class="meta-label">Most Recent Campaign:</span>
+                <strong id="stat-recent-campaign" class="text-cyan">None</strong>
+              </div>
+              <div class="meta-block">
+                <span class="meta-label">Last Device Telephony Activity:</span>
+                <strong id="stat-last-activity">No activity recorded</strong>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- SCREEN 2: QUICK SMS TEST (Notable New Function!) -->
+        <!-- ============================================================== -->
+        <section id="screen-test" class="screen-view">
+          <div class="view-intro">
+            <h2>Quick SMS Test</h2>
+            <p>Send a single carrier test message to verify SIM routing and delivery</p>
+          </div>
+
+          <div class="glass-card">
+            <div class="form-group">
+              <label for="test-phone-input">Test Destination Phone Number *</label>
+              <div class="input-with-action">
+                <input type="text" id="test-phone-input" placeholder="e.g. +1234567890 or 09924380001">
+                <button class="btn btn-sm btn-outline" onclick="fillSelfTestNumber()">Use Sample</button>
+              </div>
+              <span class="input-hint">Enter your personal phone number or a verified handset.</span>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-6">
+                <label for="test-sim-select">Sender SIM Subscription</label>
+                <select id="test-sim-select"></select>
+              </div>
+              <div class="form-group col-6">
+                <label>Carrier Compatibility</label>
+                <div class="status-chip chip-ready">
+                  <span class="chip-dot"></span>
+                  <span>Direct SIM Fallback Active</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="test-message-input">Test Message Content</label>
+              <textarea id="test-message-input" rows="3">Bulk SMS Test Dispatch: SIM carrier transmission confirmed at {time}.</textarea>
+            </div>
+
+            <div class="button-row">
+              <button class="btn btn-primary" id="btn-send-test-sms" onclick="executeQuickTestSms()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                Send Test SMS
+              </button>
+              <button class="btn btn-outline" onclick="clearTestForm()">Reset</button>
+            </div>
+
+            <!-- Real-Time Test Outcome Box -->
+            <div id="test-result-box" class="test-result-panel hidden">
+              <div class="test-result-header">
+                <span id="test-result-status-badge" class="badge badge-success">DISPATCHED</span>
+                <span id="test-result-time" class="timestamp-label">Just now</span>
+              </div>
+              <div id="test-result-details" class="test-result-text">
+                Message submitted to Android telephony manager. Awaiting carrier delivery callback...
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- SCREEN 3: NUMBER GENERATOR -->
+        <!-- ============================================================== -->
+        <section id="screen-generator" class="screen-view">
+          <div class="view-intro">
+            <h2>Number Generator</h2>
+            <p>Generate sequential phone series with 4-digit zero-padding (%04d)</p>
+          </div>
+
+          <div class="glass-card">
+            <div class="form-group">
+              <label for="gen-prefix">Phone Series / Prefix *</label>
+              <input type="text" id="gen-prefix" value="0992438" placeholder="e.g. 0992438">
+              <span class="input-hint">Country/area code series before the 4-digit suffix</span>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-6">
+                <label for="gen-start">Start Suffix (4 Digits) *</label>
+                <input type="text" id="gen-start" value="0000" maxlength="4" placeholder="0000">
+                <span class="input-hint">Start-inclusive (0000 to 9999)</span>
+              </div>
+              <div class="form-group col-6">
+                <label for="gen-end">End Suffix (4 Digits) *</label>
+                <input type="text" id="gen-end" value="0100" maxlength="4" placeholder="0100">
+                <span class="input-hint">End-exclusive (0000 to 9999)</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="gen-list-name">Target Recipient List Name</label>
+              <input type="text" id="gen-list-name" value="Generated Range (100)" placeholder="Name for recipient list">
+            </div>
+
+            <!-- Consent Warning Box -->
+            <div class="consent-notice-box">
+              <div class="notice-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                <span>Authorization & Consent Notice</span>
+              </div>
+              <p>Generated numbers are strictly marked as <strong>Unverified (Consent: 0)</strong>. Commercial or high-volume messaging requires documented recipient consent under telecom regulations.</p>
+              <label class="checkbox-container">
+                <input type="checkbox" id="gen-consent-ack">
+                <span class="checkmark"></span>
+                <span>I confirm these numbers are for legitimate testing or authorized communication.</span>
+              </label>
+            </div>
+
+            <div class="button-row">
+              <button class="btn btn-primary" onclick="generateNumberSeries()">Preview Range</button>
+              <button class="btn btn-secondary" id="btn-save-generated" disabled onclick="saveGeneratedNumbers()">Save to SQLite List</button>
+              <button class="btn btn-outline" id="btn-export-gen-csv" disabled onclick="exportGenerated('csv')">Export CSV</button>
+              <button class="btn btn-outline" id="btn-export-gen-txt" disabled onclick="exportGenerated('txt')">Export TXT</button>
+            </div>
+          </div>
+
+          <!-- Output Preview Box -->
+          <div class="glass-card">
+            <div class="card-header-row">
+              <h4>Generated Preview (<span id="gen-count-badge" class="text-cyan">0</span> numbers)</h4>
+              <span class="badge badge-info" id="gen-range-label">0000 - 0099</span>
+            </div>
+            <div id="gen-preview-container" class="preview-scroll-container">
+              <div class="empty-state">Tap "Preview Range" to generate numbers with zero-padding.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- SCREEN 4: CONTACT IMPORT -->
+        <!-- ============================================================== -->
+        <section id="screen-import" class="screen-view">
+          <div class="view-intro">
+            <h2>Contact Import</h2>
+            <p>Import recipient lists from CSV, TXT, or Excel XLSX files</p>
+          </div>
+
+          <div class="glass-card dropzone-wrapper">
+            <input type="file" id="file-input" accept=".csv, .txt, .xlsx, text/plain, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" style="display:none;" onchange="handleFileSelected(event)">
+            <div class="dropzone-box" id="file-dropzone" onclick="document.getElementById('file-input').click()">
+              <div class="dropzone-icon-ring">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="12" y1="18" x2="12" y2="12"></line>
+                  <line x1="9" y1="15" x2="12" y2="12"></line>
+                  <line x1="15" y1="15" x2="12" y2="12"></line>
+                </svg>
+              </div>
+              <h3>Choose File or Tap to Browse</h3>
+              <p>Supports .CSV, .TXT (1 number per line), and .XLSX spreadsheets</p>
+            </div>
+          </div>
+
+          <!-- Column Mapping & Validation Card -->
+          <div id="import-mapping-card" class="glass-card hidden">
+            <div class="card-header-row">
+              <h4>Column Mapping & Validation</h4>
+              <span id="import-filename-badge" class="badge badge-cyan">file.csv</span>
+            </div>
+
+            <div class="form-group">
+              <label for="import-list-name">Recipient List Title</label>
+              <input type="text" id="import-list-name" value="Imported Audience">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-6">
+                <label for="map-col-phone">Phone Column *</label>
+                <select id="map-col-phone" onchange="runImportValidation()"></select>
+              </div>
+              <div class="form-group col-6">
+                <label for="map-col-name">Name Column</label>
+                <select id="map-col-name" onchange="runImportValidation()"></select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-6">
+                <label for="map-col-group">Group Column</label>
+                <select id="map-col-group"></select>
+              </div>
+              <div class="form-group col-6">
+                <label for="map-col-consent">Consent Column</label>
+                <select id="map-col-consent" onchange="runImportValidation()"></select>
+              </div>
+            </div>
+
+            <!-- Audit Metrics Panel -->
+            <div class="import-audit-metrics">
+              <div class="audit-stat">
+                <span class="audit-num" id="audit-total">0</span>
+                <span class="audit-label">Total Rows</span>
+              </div>
+              <div class="audit-stat text-green">
+                <span class="audit-num" id="audit-valid">0</span>
+                <span class="audit-label">Valid Numbers</span>
+              </div>
+              <div class="audit-stat text-amber">
+                <span class="audit-num" id="audit-duplicate">0</span>
+                <span class="audit-label">Duplicates</span>
+              </div>
+              <div class="audit-stat text-red">
+                <span class="audit-num" id="audit-invalid">0</span>
+                <span class="audit-label">Invalid</span>
+              </div>
+            </div>
+
+            <div class="button-row">
+              <button class="btn btn-primary" id="btn-save-import" onclick="commitImportToDatabase()">Commit to SQLite Database</button>
+              <button class="btn btn-outline" onclick="cancelImport()">Cancel</button>
+            </div>
+          </div>
+
+          <!-- Stored Recipient Lists -->
+          <div class="glass-card">
+            <div class="card-header-row">
+              <h4>Saved Recipient Lists</h4>
+              <button class="btn btn-xs btn-outline" onclick="loadRecipientLists()">Refresh</button>
+            </div>
+            <div id="recipient-lists-container">
+              <div class="loading-state">Loading stored lists...</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- SCREEN 5: SUPPRESSION & OPT-OUT LIST (Notable New Function!) -->
+        <!-- ============================================================== -->
+        <section id="screen-optout" class="screen-view">
+          <div class="view-intro">
+            <h2>Suppression & Opt-Out List</h2>
+            <p>Manage unsubscribed and blocked contacts to automatically prevent accidental messaging</p>
+          </div>
+
+          <div class="glass-card">
+            <h4>Add Number to Blacklist</h4>
+            <div class="form-row" style="margin-top: 10px;">
+              <div class="form-group col-6">
+                <input type="text" id="blacklist-phone-input" placeholder="Phone number (e.g. +123456789)">
+              </div>
+              <div class="form-group col-4">
+                <input type="text" id="blacklist-reason-input" placeholder="Reason (e.g. Replied STOP)">
+              </div>
+              <div class="form-group" style="align-self: flex-start;">
+                <button class="btn btn-danger" onclick="addToBlacklist()">Add to Suppression</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card">
+            <div class="card-header-row">
+              <h4>Currently Suppressed Contacts (<span id="blacklist-count" class="text-red">0</span>)</h4>
+              <button class="btn btn-xs btn-outline" onclick="loadOptOutList()">Refresh</button>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Phone Number</th>
+                    <th>Reason / Source</th>
+                    <th>Date Added</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="blacklist-table-body">
+                  <tr><td colspan="4" class="text-center">Loading suppression list...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- SCREEN 6: CAMPAIGN COMPOSER -->
+        <!-- ============================================================== -->
+        <section id="screen-composer" class="screen-view">
+          <div class="view-intro">
+            <h2>Campaign Composer</h2>
+            <p>Compose personalized template & configure carrier sending intervals</p>
+          </div>
+
+          <div class="glass-card">
+            <div class="form-group">
+              <label for="campaign-name">Campaign Title *</label>
+              <input type="text" id="campaign-name" placeholder="e.g. Service Alert Q4" value="Campaign - Oct 18">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-6">
+                <label for="campaign-recipient-list">Target Recipient List *</label>
+                <select id="campaign-recipient-list" onchange="updateRecipientCountPreview()"></select>
+              </div>
+              <div class="form-group col-6">
+                <label for="campaign-sim-select">Sender SIM Subscription *</label>
+                <select id="campaign-sim-select"></select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="label-with-action">
+                <label for="campaign-template-select">Message Template</label>
+                <button class="btn-text" onclick="showSaveTemplateModal()">Save current as template</button>
+              </div>
+              <select id="campaign-template-select" onchange="applySelectedTemplate()"></select>
+            </div>
+
+            <div class="form-group">
+              <div class="label-with-action">
+                <label for="campaign-message-text">Message Content *</label>
+                <div class="placeholder-chips">
+                  <button class="chip-btn" onclick="insertPlaceholder('{name}')">+ {name}</button>
+                  <button class="chip-btn" onclick="insertPlaceholder('{date}')">+ {date}</button>
+                  <button class="chip-btn" onclick="insertPlaceholder('{time}')">+ {time}</button>
+                </div>
+              </div>
+              <textarea id="campaign-message-text" rows="4" placeholder="Hello {name}, your appointment is confirmed..." oninput="updateMessageMetrics()"></textarea>
+              
+              <!-- Segment & Character Live Counter -->
+              <div class="message-meta-pills">
+                <span class="pill-meta"><strong id="char-count">0</strong> chars</span>
+                <span class="pill-meta"><strong id="segment-count">1</strong> segment(s) (<span id="encoding-type">GSM-7</span>)</span>
+              </div>
+            </div>
+
+            <!-- Live Interactive Handset Preview -->
+            <div class="preview-handset-card">
+              <div class="handset-topbar">
+                <span>SMS Preview</span>
+                <div class="contact-switcher">
+                  <span>Sample Contact:</span>
+                  <select id="sample-contact-picker" onchange="updateMessageMetrics()">
+                    <option value="Alice Johnson">Alice Johnson</option>
+                    <option value="Bob Miller">Bob Miller</option>
+                    <option value="Carlos Ruiz">Carlos Ruiz</option>
+                  </select>
+                </div>
+              </div>
+              <div class="sms-bubble-live" id="sms-live-preview">
+                Hello Alice Johnson, your appointment is confirmed...
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 16px;">
+              <label for="campaign-interval-slider">
+                Sending Interval: <strong id="interval-display" class="text-cyan">5.0 seconds</strong>
+              </label>
+              <input type="range" id="campaign-interval-slider" min="1000" max="30000" step="500" value="5000" oninput="updateIntervalSlider(this.value)">
+              <span class="input-hint">Enforces conservative delays between sends to respect carrier rate policies.</span>
+            </div>
+
+            <div class="form-group">
+              <label class="checkbox-container">
+                <input type="checkbox" id="allow-unverified-consent" checked>
+                <span class="checkmark"></span>
+                <span>Include unverified contacts (Opted-out / blacklisted contacts are strictly excluded).</span>
+              </label>
+            </div>
+
+            <div class="button-row">
+              <button class="btn btn-primary btn-lg" onclick="openStartCampaignConfirmation()">
+                Launch Campaign Broadcast
+              </button>
+              <button class="btn btn-outline" onclick="clearComposer()">Reset Form</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- SCREEN 7: ACTIVE CAMPAIGN MONITOR -->
+        <!-- ============================================================== -->
+        <section id="screen-active" class="screen-view">
+          <div class="view-intro">
+            <h2>Active Campaign Monitor</h2>
+            <p>Live synchronized queue status, countdown clock, and device telemetry</p>
+          </div>
+
+          <div class="glass-card active-dashboard-card">
+            <div class="active-card-top">
+              <div>
+                <span class="status-tag" id="active-status-badge">PROCESSING</span>
+                <h3 id="active-campaign-title" class="active-title">No Active Campaign</h3>
+              </div>
+
+              <!-- Animated SVG Countdown Ring -->
+              <div class="countdown-svg-widget">
+                <svg class="countdown-svg" viewBox="0 0 80 80">
+                  <circle class="countdown-bg-ring" cx="40" cy="40" r="34"></circle>
+                  <circle class="countdown-meter" id="countdown-meter-circle" cx="40" cy="40" r="34"></circle>
+                </svg>
+                <div class="countdown-center-text">
+                  <span id="active-countdown-num" class="countdown-number">0s</span>
+                  <small>Next Send</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Animated Progress Bar -->
+            <div class="progress-container-wrap">
+              <div class="progress-labels-row">
+                <span>Transmission Progress: <strong id="active-processed-ratio">0 / 0</strong></span>
+                <strong id="active-progress-percent" class="text-cyan">0%</strong>
+              </div>
+              <div class="progress-bar-shell">
+                <div class="progress-bar-glow" id="active-progress-bar" style="width: 0%;"></div>
+              </div>
+              <div class="progress-sub-info">
+                <span>Estimated Time Remaining: <strong id="active-time-estimate" class="text-cyan">Calculating...</strong></span>
+                <span>Interval: <strong id="active-interval-val">5.0s</strong></span>
+              </div>
+            </div>
+
+            <!-- Active Metrics Counter Grid -->
+            <div class="active-counters-grid">
+              <div class="active-counter-box">
+                <span class="counter-label">Current Recipient</span>
+                <span id="active-current-num" class="counter-val font-mono">None</span>
+              </div>
+              <div class="active-counter-box text-blue">
+                <span class="counter-label">Submitted</span>
+                <span id="active-submitted-count" class="counter-val">0</span>
+              </div>
+              <div class="active-counter-box text-green">
+                <span class="counter-label">Confirmed Delivered</span>
+                <span id="active-delivered-count" class="counter-val">0</span>
+              </div>
+              <div class="active-counter-box text-red">
+                <span class="counter-label">Failed</span>
+                <span id="active-failed-count" class="counter-val">0</span>
+              </div>
+            </div>
+
+            <!-- Queue Controls -->
+            <div class="active-controls-bar">
+              <button class="btn btn-warning" id="btn-pause-campaign" onclick="pauseActiveCampaign()">Pause Broadcast</button>
+              <button class="btn btn-success hidden" id="btn-resume-campaign" onclick="resumeActiveCampaign()">Resume Broadcast</button>
+              <button class="btn btn-danger" id="btn-stop-campaign" onclick="stopActiveCampaign()">Stop Campaign</button>
+              <button class="btn btn-outline-cyan" id="btn-active-email-report" onclick="sendReportForCurrentCampaign()">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                Send Report to Email
+              </button>
+              <button class="btn btn-outline" onclick="navigateTo('screen-dashboard')">Dashboard</button>
+            </div>
+          </div>
+
+          <!-- Live Device Telemetry Terminal -->
+          <div class="glass-card telemetry-terminal-card">
+            <div class="card-header-row">
+              <div class="header-with-icon">
+                <span class="terminal-dot red"></span>
+                <span class="terminal-dot yellow"></span>
+                <span class="terminal-dot green"></span>
+                <h4 style="margin-left: 6px;">Live Telephony Event Stream</h4>
+              </div>
+              <span class="badge badge-cyan"><span class="live-dot-ping"></span> Sync</span>
+            </div>
+            <div class="terminal-feed" id="live-log-container">
+              <div class="log-entry">Awaiting telephony event dispatch...</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- SCREEN 8: CAMPAIGN HISTORY -->
+        <!-- ============================================================== -->
+        <section id="screen-history" class="screen-view">
+          <div class="view-intro">
+            <h2>Campaign History</h2>
+            <p>Archive of past broadcasts with delivery performance records</p>
+          </div>
+
+          <div class="glass-card">
+            <div class="card-header-row">
+              <h4>Broadcast Records</h4>
+              <button class="btn btn-xs btn-outline" onclick="loadCampaignHistory()">Refresh</button>
+            </div>
+            <div id="history-list-container">
+              <div class="loading-state">Loading history...</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- SCREEN 9: REPORTS AND ANALYTICS -->
+        <!-- ============================================================== -->
+        <section id="screen-reports" class="screen-view">
+          <div class="view-intro">
+            <h2>Reports & Audit Logs</h2>
+            <p>Examine message job correlation IDs, delivery confirmations, and export CSV</p>
+          </div>
+
+          <div class="glass-card filter-toolbar">
+            <div class="form-row">
+              <div class="form-group col-4">
+                <label for="report-filter-campaign">Filter Campaign</label>
+                <select id="report-filter-campaign" onchange="loadReports()"></select>
+              </div>
+              <div class="form-group col-4">
+                <label for="report-filter-status">Filter Status</label>
+                <select id="report-filter-status" onchange="loadReports()">
+                  <option value="ALL">All Statuses</option>
+                  <option value="Delivered">Delivered</option>
+                  <option value="Submitted">Submitted</option>
+                  <option value="Failed">Failed</option>
+                  <option value="Queued">Queued</option>
+                  <option value="Unknown">Unknown</option>
+                </select>
+              </div>
+              <div class="form-group col-4">
+                <label for="report-filter-date">Date Period</label>
+                <select id="report-filter-date" onchange="loadReports()">
+                  <option value="ALL">All Time</option>
+                  <option value="TODAY">Today</option>
+                  <option value="7DAYS">Last 7 Days</option>
+                  <option value="30DAYS">Last 30 Days</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- KPI Rate Cards -->
+          <div class="stats-counter-grid">
+            <div class="stat-card stat-highlight-green">
+              <span class="stat-label">Delivery Success Rate</span>
+              <span id="rep-success-rate" class="stat-value">0%</span>
+              <span class="stat-sub">Submitted & Delivered</span>
+            </div>
+            <div class="stat-card stat-highlight-red">
+              <span class="stat-label">Failure Rate</span>
+              <span id="rep-failure-rate" class="stat-value">0%</span>
+              <span class="stat-sub">Carrier or radio errors</span>
+            </div>
+            <div class="stat-card stat-highlight-blue">
+              <span class="stat-label">Confirmed Delivered</span>
+              <span id="rep-delivered" class="stat-value">0</span>
+              <span class="stat-sub">Handset confirmations</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Total Jobs In Filter</span>
+              <span id="rep-total" class="stat-value">0</span>
+              <span class="stat-sub">Recorded jobs</span>
+            </div>
+          </div>
+
+          <!-- Jobs Table -->
+          <div class="glass-card">
+            <div class="card-header-row">
+              <h4>Message Job Telemetry</h4>
+              <div class="header-actions-group">
+                <button class="btn btn-xs btn-outline" id="btn-toggle-mask" onclick="toggleNumberMasking()">Show Full Numbers</button>
+                <button class="btn btn-xs btn-outline-cyan" onclick="openEmailReportModal()">
+                  <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                  Send Report to Email
+                </button>
+                <button class="btn btn-xs btn-primary" onclick="exportReportsCsv()">Export CSV</button>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Job ID</th>
+                    <th>Destination</th>
+                    <th>Campaign</th>
+                    <th>Message</th>
+                    <th>Status</th>
+                    <th>Submitted</th>
+                    <th>Delivered</th>
+                    <th>Error Info</th>
+                  </tr>
+                </thead>
+                <tbody id="report-jobs-body">
+                  <tr><td colspan="8" class="text-center">Loading audit records...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- SCREEN 10: SETTINGS -->
+        <!-- ============================================================== -->
+        <section id="screen-settings" class="screen-view">
+          <div class="view-intro">
+            <h2>Preferences & Privacy</h2>
+            <p>Android SharedPreferences configuration and local SQLite management</p>
+          </div>
+
+          <div class="glass-card">
+            <h3 class="subsection-heading">Telephony Defaults</h3>
+            <div class="form-group">
+              <label for="pref-interval">Default Sending Interval (ms)</label>
+              <input type="number" id="pref-interval" min="1000" max="60000" step="500" value="5000">
+              <span class="input-hint">Recommended: 5,000ms (5 seconds)</span>
+            </div>
+
+            <div class="form-group">
+              <label for="pref-max-campaign">Maximum Allowed Campaign Limit</label>
+              <input type="number" id="pref-max-campaign" min="10" max="5000" value="500">
+            </div>
+
+            <div class="form-group">
+              <label for="pref-default-prefix">Default Number Series Prefix</label>
+              <input type="text" id="pref-default-prefix" value="0992438">
+            </div>
+
+            <h3 class="subsection-heading" style="margin-top: 1.5rem;">Display & Notifications</h3>
+            <div class="form-group">
+              <label class="checkbox-container">
+                <input type="checkbox" id="pref-show-countdown" checked>
+                <span class="checkmark"></span>
+                <span>Show live SVG countdown ring during active campaign</span>
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label class="checkbox-container">
+                <input type="checkbox" id="pref-enable-notifications" checked>
+                <span class="checkmark"></span>
+                <span>Enable Android system notifications for milestones & warnings</span>
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label class="checkbox-container">
+                <input type="checkbox" id="pref-require-confirm" checked>
+                <span class="checkmark"></span>
+                <span>Require explicit confirmation modal before starting broadcast</span>
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label class="checkbox-container">
+                <input type="checkbox" id="pref-mask-numbers" checked>
+                <span class="checkmark"></span>
+                <span>Mask phone numbers by default on screen for privacy</span>
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label for="pref-theme">Theme Color Scheme</label>
+              <select id="pref-theme" onchange="applyTheme(this.value)">
+                <option value="system">System Default</option>
+                <option value="dark">Cyber Dark</option>
+                <option value="light">Crisp Light</option>
+              </select>
+            </div>
+
+            <h3 class="subsection-heading" style="margin-top: 1.5rem;">📧 Automated Email Blast Reporting (Gmail SMTP)</h3>
+            <div class="smtp-status-box" style="background: rgba(34, 197, 94, 0.08); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: var(--radius-sm); padding: 12px; margin-bottom: 14px;">
+              <div style="display:flex; align-items:center; gap:8px; font-weight:600; color:#22c55e;">
+                <span class="status-indicator-dot online"></span>
+                <span>Gmail SMTP Direct Dispatch Configured</span>
+              </div>
+              <div style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">
+                Sender: <strong style="color:var(--text-main);">itdepttranzfast@gmail.com</strong> (Silently dispatches reports in the background without opening external email apps)
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="pref-report-email">Recipient Email Address</label>
+              <div class="input-with-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                <input type="email" id="pref-report-email" placeholder="email address">
+              </div>
+              <span class="input-hint">Formatted TXT blast reports (ACR Services format) will be sent to this email address automatically upon campaign completion.</span>
+            </div>
+
+            <div class="form-group">
+              <label class="checkbox-container">
+                <input type="checkbox" id="pref-auto-email-report">
+                <span class="checkmark"></span>
+                <span>Auto-send report to email automatically when a campaign finishes</span>
+              </label>
+            </div>
+
+            <div class="button-row" style="margin-top: 8px;">
+              <button class="btn btn-sm btn-outline" type="button" onclick="testSmtpConnection()">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                Send Test Email via Gmail SMTP
+              </button>
+            </div>
+
+            <h3 class="subsection-heading" style="margin-top: 1.5rem;">Telephony & Carrier Privileges</h3>
+            <div class="form-group">
+              <label class="checkbox-container">
+                <input type="checkbox" id="pref-compat-mode" checked>
+                <span class="checkmark"></span>
+                <span>Direct Carrier Compatibility Mode (avoids READ_PRIVILEGED_PHONE_STATE carrier errors)</span>
+              </label>
+              <span class="input-hint">Uses system default SMS dispatcher to bypass multi-SIM carrier privilege restrictions on modern Android devices.</span>
+            </div>
+
+            <div class="form-group">
+              <label class="checkbox-container">
+                <input type="checkbox" id="pref-sim-mode">
+                <span class="checkmark"></span>
+                <span>Carrier Test & Simulation Mode (for testing without physical SIM card)</span>
+              </label>
+            </div>
+
+            <div class="button-row" style="margin-top: 1.5rem;">
+              <button class="btn btn-primary" onclick="saveSettings()">Save Preferences</button>
+              <button class="btn btn-outline" onclick="resetSettingsToDefaults()">Reset to Defaults</button>
+            </div>
+          </div>
+
+          <!-- Danger Zone -->
+          <div class="glass-card danger-zone-card">
+            <h3 class="subsection-heading text-red">Local Data Purge</h3>
+            <p class="section-desc">Zero cloud copies exist. All data lives on this handset. Purging is permanent.</p>
+            <div class="button-row">
+              <button class="btn btn-outline-danger" onclick="confirmClearData('history')">Clear Broadcast History</button>
+              <button class="btn btn-outline-danger" onclick="confirmClearData('contacts')">Delete All Contacts</button>
+              <button class="btn btn-danger" onclick="confirmClearData('all')">Purge Entire SQLite Database</button>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- MODALS -->
+    <!-- ============================================================== -->
+
+    <!-- CAMPAIGN START CONFIRMATION MODAL -->
+    <div id="modal-start-confirm" class="modal-overlay hidden">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <h3>Authorize Campaign Broadcast</h3>
+          <button class="modal-close" onclick="closeModal('modal-start-confirm')">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-warning-bar">
+            <span>⚠️</span>
+            <span>SMS messages will be transmitted via your device's mobile carrier SIM card. Standard messaging rates apply.</span>
+          </div>
+          <div class="summary-details-card">
+            <div class="summary-item">
+              <span>Campaign:</span>
+              <strong id="modal-conf-title">-</strong>
+            </div>
+            <div class="summary-item">
+              <span>Recipients:</span>
+              <strong id="modal-conf-recipients" class="text-cyan">-</strong>
+            </div>
+            <div class="summary-item">
+              <span>Sender SIM:</span>
+              <strong id="modal-conf-sim">-</strong>
+            </div>
+            <div class="summary-item">
+              <span>Interval:</span>
+              <strong id="modal-conf-interval">-</strong>
+            </div>
+            <div class="summary-item">
+              <span>Est. Duration:</span>
+              <strong id="modal-conf-duration">-</strong>
+            </div>
+          </div>
+          <div class="preview-handset-card" style="margin-top: 12px;">
+            <span class="preview-bubble-label">Rendered Preview:</span>
+            <div class="sms-bubble-live" id="modal-conf-preview">...</div>
+          </div>
+          <label class="checkbox-container" style="margin-top: 14px;">
+            <input type="checkbox" id="modal-conf-ack">
+            <span class="checkmark"></span>
+            <span>I authorize direct SIM transmission to the recipient list.</span>
+          </label>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" id="btn-modal-confirm-start" onclick="confirmLaunchCampaign()" disabled>Start Broadcast Now</button>
+          <button class="btn btn-outline" onclick="closeModal('modal-start-confirm')">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SAVE TEMPLATE MODAL -->
+    <div id="modal-save-template" class="modal-overlay hidden">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <h3>Save Message Template</h3>
+          <button class="modal-close" onclick="closeModal('modal-save-template')">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="template-name-input">Template Name</label>
+            <input type="text" id="template-name-input" placeholder="e.g. Service Notification">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" onclick="confirmSaveTemplate()">Save Template</button>
+          <button class="btn btn-outline" onclick="closeModal('modal-save-template')">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- EMAIL BLAST REPORT MODAL -->
+    <div id="modal-email-report" class="modal-overlay hidden">
+      <div class="modal-dialog modal-dialog-lg">
+        <div class="modal-header">
+          <div class="modal-title-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-cyan"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <h3>Send SMS Blast Report to Email</h3>
+          </div>
+          <button class="modal-close" onclick="closeModal('modal-email-report')">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="email-report-target">Recipient Email Address</label>
+            <div class="input-with-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <input type="email" id="email-report-target" placeholder="email address (e.g. operations@acrservices.com)">
+            </div>
+            <span class="input-hint">Directly sent via Gmail SMTP (itdepttranzfast@gmail.com) in the background without opening external email apps.</span>
+          </div>
+
+          <div class="form-group" style="margin-top: 14px;">
+            <div class="card-header-row" style="margin-bottom: 6px;">
+              <label>Report Preview (ACR Services format)</label>
+              <div class="header-actions-group">
+                <button class="btn btn-xs btn-outline" onclick="copyReportText()">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  Copy Report
+                </button>
+                <button class="btn btn-xs btn-outline" onclick="downloadReportTxt()">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                  Download TXT
+                </button>
+              </div>
+            </div>
+            <textarea id="email-report-preview" class="code-preview-area" rows="11" readonly style="width:100%; font-family:var(--font-mono); font-size:0.8rem; background:var(--bg-subtle); color:var(--text-main); border:1px solid var(--border); border-radius:var(--radius-sm); padding:10px; resize:vertical;"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" onclick="confirmDispatchEmailReport()">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            Send Report to Email
+          </button>
+          <button class="btn btn-outline" onclick="closeModal('modal-email-report')">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="toast-popup hidden"></div>
+
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

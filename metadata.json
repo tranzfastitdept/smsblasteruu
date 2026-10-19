@@ -1,0 +1,8 @@
+{
+  "name": "Bulk SMS Campaign Manager",
+  "description": "Carrier-SIM bulk SMS campaign manager with native queue scheduler, SQLite persistence, and real-time analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
